@@ -4,55 +4,45 @@
 # CAHAT
 A distributed chat service
 
-This is the main repository of this project. There ~~is~~ _will be_ a realtime demo ~~here~~. In the demo the back end is mocked so it can be hosted and served from Github.
+This is the main repository of this project. There is a realtime demo [here](https://dgrcode.github.io/cahat/). In the demo the back end is mocked so it can be hosted and served from Github.
+
+For the demo there are a few features that are not available, as it is mainly a front end demo. You cannot:
+ - Add new server.
+ - Change your name –nobody would see it anyways ¯\\\_(ツ)\_/¯–.
 
 There are two other repositories with the code of the [front end](https://github.com/dgrcode/chat-front) and the [back end](https://github.com/dgrcode/chat-back).
 
+
+## How it works
+### Two applications
+#### Front end
+There is a front end application built with React, Redux and bundled with Webpack. This application can connect to different servers –we'll get there in a second–, and it is in charge of displaying stuff.
+
+One client –front end app– is one _chat user_ in the chat.
+
+#### Back end
+There is also a back end application, which is just a WebSocket server, built with node and [ws](https://github.com/websockets/ws). The back end is in charge of storing user names, user ids, and messages. The information is persisted in a MongoDB database.
+
+One server –back end app– is a _chat group_, or _chat room_, in the chat.
+
+### Relation between applications
+One client can be connected to multiple servers, and one server can be connected to multiple clients. There is a many to many relation between them.
+
+Given the front end architecture, it made sense for me to make both apps communicate through Redux actions. The idea is that, if I need to send information from the server to the client, I generate an action on the server, send it to the client through the WebSocket connection, and it gets immediately dispatched in the client Redux store.
+
+The difference when the communication goes in the other direction is that the server doesn't have a Redux store nor a reducer. I thought that due to the asynchronous nature of the back end –database, communications, etc.–, creating _pure functions_ to handle changes in state was a big overhead. Instead of that approach, I use a simple `switch` block to handle each type of action received from the front end. It is the same idea of a reducer used in Redux, but in my case I don't try to keep a state in the back end.
+
+
 ## How to use it
+Due to lack of security implementation –[see disclaimer](#no_entry-disclaimer)– the front end must be served from localhost, otherwise the https connection will refuse any insecure WebSocket connection.
 
-### Dependencies
+This is something that I have on the [pending features list](#work-in-progress), that I didn't finish during RC because I found other projects that would allow me to learn more.
 
-To use cahat you need to have [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/en/docs/install) and [MongoDB](https://www.mongodb.com/download-center#community)
+### Back end
+To see how to use the front end, please read the [instruction on the front end repo](https://github.com/dgrcode/chat-front).
 
-
-### Instructions
-
-Once you have the dependencies installed, it should be really easy to get a server running. The steps to follow are
-
-1. Clone this repo. With a terminal, go to the folder where you want to keep your files, and then run this command:
-    ```
-    git clone https://github.com/dgrcode/chat-back.git
-    ```
-
-2. Install the project dependencies with the command:
-    ```js
-    // if you're using npm
-    npm install
-
-    // if you're using yarn
-    yarn install
-    ```
-3. **[optional]** Create a `.env` file whit one or more of the following options:
-    - **PORT**: is the port where the WebSocket server will be listening. It defaults to _4000_
-    - **NAME**: is the name that the server will send to its clients. It defaults to _"No name"_
-
-4. Run the database and the server. There is script can be used to check if your directory is ready to store the data, start the database, and run the server. You just have to run the command:
-    ```js
-    // if you're using npm
-    npm start
-
-    // if you're using yarn
-    yarn install
-    ```
-
-5. At this point the server is running, but remember when stopping it to stop the database, which was running in a background process. To ease the process there is a script that does that. You just have to run:
-    ```js
-    // if you're using npm
-    npm run kill
-
-    // if you're using yarn
-    yarn kill
-    ```
+### Front end
+To see how to use the back end, please read the [instruction on the back end repo](https://github.com/dgrcode/chat-back).
 
 
 ## :no_entry: Disclaimer
@@ -62,19 +52,30 @@ This project don't implement any security measure. Therefore, **any data transmi
 
 ## Motivation
 
-This project was created during my batch at the [Recurse Center](https://www.recurse.com). My main goal for doing this project was to learn about:
- - React
- - Redux
- - MongoDB
- - WebSockets
- - Node
- - Progressive Web Apps
- - React Native
- - WebRTC
+This project was done during my batch at the [Recurse Center](https://www.recurse.com). My main goal for doing this project was to learn about:
+ - [x] React
+ - [x] Redux
+ - [x] MongoDB
+ - [x] WebSockets
+ - [x] Node
+ - [ ] Progressive Web Apps
+ - [ ] React Native
+ - [ ] WebRTC
 
 ## Work In Progress
 
 So far this project implements the core functionalities of a chat, but eventually I'd like to add new features as:
- - Video chat
- - Private messaging
- - Maybe? A main backend service acting as DNS, and storing the relations between users and servers. WebSocket servers could voluntarily sign up into that main backend, or be kept in private
+
+##### Security
+ - [ ] Implement a secure WebSocket server
+ - [ ] Encrypt the stored data
+
+##### Features
+ - [ ] Remember user connections
+ - [ ] Give custom name to another person
+ - [ ] List of connected users
+ - [ ] Private messaging between users
+ - [ ] Video chat using WebRTC
+ - [ ] New messages indicator
+ - [ ] Remove connection
+ - [ ] Emoji support :+1:
