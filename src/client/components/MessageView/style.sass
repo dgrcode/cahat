@@ -1,0 +1,60 @@
+@import "../../styles/variables.sass"
+
+.message
+  width: auto
+  max-width: 80%
+  margin: 10px 0
+  padding: 6px 15px
+  border-radius: 2px
+  position: relative
+
+  .message-info
+    font-size: 0.7em
+    font-weight: bold
+    color: rgba(0, 0, 0, 0.3)
+
+    .message-owner
+      margin: -5px 0 5px
+
+    .message-time
+      font-style: italic
+
+  .message-content
+    & p
+      margin: 0
+
+.from-another
+  background-color: $fromAnotherColor
+  margin-left: 20px
+  margin-right: auto
+  border-radius: 20px 20px 20px 0
+
+  &:after
+    content: ""
+    display: block
+    position: absolute
+    bottom: 0
+    left: 0
+    margin-left: -10px
+    width: 0
+    border-width: 15px 15px 0 0
+    border-style: solid
+    border-color: transparent $fromAnotherColor
+
+.message.from-user
+    background-color: $fromUserColor
+    margin-left: auto
+    margin-right: 20px
+    border-radius: 20px 20px 0 20px
+
+    &:after
+      content: ""
+      display: block
+      position: absolute
+      bottom: 0
+      right: 0
+      margin-right: -10px
+      width: 0
+      border-width: 0 15px 15px 0
+      border-style: solid
+      border-color: transparent transparent $fromUserColor

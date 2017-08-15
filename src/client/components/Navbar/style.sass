@@ -1,0 +1,21 @@
+@import "../../styles/variables.sass"
+
+.navbar
+  display: flex
+  position: relative
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+  background-color: $primaryColor
+  z-index: 1000
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .3)
+  box-sizing: border-box
+  color: white
+
+  @media only screen and (max-width : $breakPhone)
+    padding: 12px
+
+  .settings-button
+
+    path
+      fill: white

@@ -1,0 +1,22 @@
+@import "../../styles/variables.sass"
+
+.messages-list
+  display: flex
+  flex-direction: column
+
+  .feedback.no-ws
+    display: flex
+    height: 100%
+    width: 100%
+    justify-content: center
+    align-items: center
+    font-size: 3em
+    text-align: center
+    color: $dividerColorDark
+
+
+  .sticky
+    height: 0
+    position: absolute
+    z-index: 200
+    width: $chatChildrenWidth

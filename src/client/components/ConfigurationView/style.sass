@@ -1,0 +1,49 @@
+@import "../../styles/variables.sass"
+
+.configuration
+  display: inline-flex
+  flex-direction: column
+  padding: 1em
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3)
+  background-color: $fromAnotherColor
+  overflow-y: scroll
+  box-sizing: border-box
+
+  *
+    flex-shrink: 0
+
+  label
+    display: flex
+    flex-wrap: wrap
+    align-items: center
+    padding: 6px
+
+    &.no-wrap
+      flex-wrap: nowrap
+
+  input
+    height: 24px
+    margin: 8px
+    border: 1px solid $dividerColorDark
+    border-radius: 4px
+
+  input[type=text]
+    width: 80%
+
+  input[type=checkbox]
+    width: 24px
+
+  button
+    margin: 8px
+    padding: 0 8px
+    height: 24px
+    border: none
+    border-radius: 500px
+    background-color: $accentColor
+    color: white
+    font-weight: bold
+    font-size: 1em
+
+    &.revert-fullscreen
+      background-color: $primaryColor
+      margin-right: auto

@@ -1,0 +1,12 @@
+# Private files
+.*
+!.gitignore
+
+# Node modules
+node_modules
+
+# Yarn files
+yarn.lock
+
+# Babel cache
+babel_cache

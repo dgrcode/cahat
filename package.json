@@ -1,0 +1,47 @@
+{
+  "name": "chat-server",
+  "version": "0.0.0",
+  "description": "Small chat server",
+  "main": "index.js",
+  "author": "Daniel González Reina",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --config webpack.config.prod.js -p",
+    "dev": "webpack-dev-server --inline --hot",
+    "test": "jest",
+    "watch": "jest --watchAll"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "enzyme": "^2.9.1",
+    "eslint": "^3.16.1",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-react": "^6.10.3",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "jest": "^20.0.4",
+    "jsdom": "^11.0.0",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0"
+  },
+  "dependencies": {
+    "babel-core": "^6.25.0",
+    "markdown": "^0.5.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      ".*\\.(css|sass)$": "<rootDir>/test/dummyStyle.js"
+    }
+  }
+}
